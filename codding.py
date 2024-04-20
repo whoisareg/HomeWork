@@ -1,38 +1,36 @@
+
+
 class Car:
-    def __init__(self, model, age, tank_size, consuption):
+    def __init__(self, model, year, tank_size, consumption):
         self.model = model
-        self.age = age
+        self.year = year
         self.tank_size = tank_size
         self.petrol_amount = 0
-        self.consuption = consuption
+        self.consumption = consumption
         
-    def fill(self):
-        print('qani litr benzin a harkavor?')
-        amount = float(input())
+    
+    def fill(self, amount):
         if amount <= 0:
-            print("hamakargi sxal, krkin pordzeq")
+            raise ValueError("Invalid amount.")
         elif self.petrol_amount + amount > self.tank_size:
-            amount = self.tank_size
-            print(f"duq lcrel eq {amount} litr benzin")
-        else:
-            self.petrol_amount += amount
-            print(f"duq lcrel eq {amount} litr benzin")
+            amount = self.tank_size - self.petrol_amount
+        self.petrol_amount += amount
+        print(f"{amount} liters of petrol added.")
             
-    def go(self):
-        print('vorqan chanaparh eq uzum ancnel km-ov?')
-        distance = float(input())
-        needed_petrol = distance * self.consuption
+    
+    def go(self, distance):
+        needed_petrol = distance * self.consumption
         if needed_petrol <= self.petrol_amount:
             self.petrol_amount -= needed_petrol
-            print(f"qshvel a {distance} km, exac benziny {self.petrol_amount} litr a.")
+            print(f"Distance traveled: {distance} km. The capacity of the tank is {self.petrol_amount} liters.")
         else:
-            print("dzer unecac benziny dzez tex chi hascni")
+            print("Not enough petrol to cover the distance. Please fill up.")
+            print(f"Current petrol amount: {self.petrol_amount} liters.")
 
-                
-a1 = Car("Ford Fusion", 7, 63, 0.3)
-a1.fill()
-a1.go()
 
+myCar = Car("Ford Fusion", 2017, 63, 0.3)
+myCar.fill(40)
+myCar.go(120)
 
                 
                 
