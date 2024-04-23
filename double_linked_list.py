@@ -1,0 +1,53 @@
+
+class Node():
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.previous = None
+        
+class DoubleLinkedList():
+    def __init__(self, head):
+        self.head = head
+        
+    def traverse(self):
+        pahoc = self.head
+        while pahoc is not None:
+            print(pahoc.value)
+            pahoc = pahoc.next
+        
+    
+    def append(self, new_node):
+        pahoc = self.head  
+        while pahoc.next is not None:
+            pahoc = pahoc.next    
+        pahoc.next = new_node
+        new_node.previous = pahoc  
+            
+        
+
+    def insert(self, new_node, index):
+        pahoc = self.head
+        current_index = 0
+        if index == 0:
+            new_node.next = pahoc
+            self.head = new_node
+            pahoc.next.previous = new_node
+        
+        else:    
+            while pahoc.next is not None and current_index < index:
+                current_index += 1
+            new_node.next = pahoc.next
+            new_node.previous = pahoc.next.previous
+            pahoc.next = new_node      
+            new_node.next.previous = new_node 
+        
+
+            
+_list = DoubleLinkedList(Node(1))
+_list.append(Node(9))
+_list.append(Node(19))
+_list.append(Node(29))
+_list.insert(Node(7), 0)
+_list.traverse()
+
+    
